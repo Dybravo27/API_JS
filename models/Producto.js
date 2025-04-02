@@ -1,12 +1,6 @@
 import connection from "../utils/db.js";
 
 class Producto{
-  constructor(nombre, descripcion,precio,categoria_id) {
-    this.nombre = nombre;
-    this.descripcion = descripcion;
-    this.precio = precio;
-    this.categoria_id = categoria_id;
-  }
   /**
    * Metodo para obtener los registros de la base de datos
    * @returns  {Array} listado de los productos en un arreglo
@@ -20,19 +14,13 @@ class Producto{
     }
   }
 
-  async create() {
+  async create(nombre,descripcion,precio,categoria_id) {
     try {
       const [result] = await connection.query("INSERT INTO productos (nombre, descripcion, precio, categoria_id) VALUES (?,?,?,?)",
-        [this.nombre, this.descripcion, this.precio, this.categoria_id]);
-      return {
-        id: result.id,
-        nombre: this.nombre,
-        descripcion: this.descripcion,
-        precio: this.precio,
-        categoria_id: this.categoria_id
-      }
+        [nombre, descripcion, precio, categoria_id]);
+      return { id: result.id, nombre, descripcion, precio, categoria_id  }
     } catch (error) {
-      throw new Error("ERROR: Al crear la productos");
+      throw new Error("ERROR: Al crear los productos");
     }
   }
 }
