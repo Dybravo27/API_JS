@@ -9,9 +9,33 @@ class CategoriaController {
   static createCategoria = async(req,res) => {
     try {
       const { nombre, descripcion } = req.body;
-      const OBJCategoria = new Categoria(nombre, descripcion);
-      const categorias = await OBJCategoria.create();
-      res.status(201).json(categorias)
+      const OBJCategoria = new Categoria();
+      const categoria = await OBJCategoria.create(nombre, descripcion);
+      res.status(201).json(categoria)
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
+  static updateCategoria = async (req, res) => {
+    const { id } = req.params;
+    const { nombre, descripcion } = req.body;
+    try {
+      const OBJCategoria = new Categoria();
+      const categoria = await OBJCategoria.update(nombre, descripcion,id);
+      res.status(201).json(categoria)
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  static updateParcialCategoria = async (req, res) => {
+    const { id } = req.params;
+    const campos = req.body;
+    try {
+      const OBJCategoria = new Categoria();
+      const categoria = await OBJCategoria.updateParcial(campos,id);
+      res.status(201).json(categoria)
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
