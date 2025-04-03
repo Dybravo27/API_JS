@@ -31,6 +31,17 @@ class ProductoController {
     }
   }
 
+  static updateParcialProducto = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const campos = req.body;
+      const OBJProducto = new Producto();
+      const producto = await OBJProducto.updateParcial(campos, id);
+      res.status(201).json(producto)
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }
 
 export default ProductoController;

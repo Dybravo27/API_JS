@@ -8,4 +8,6 @@ router.post('/', validarProducto, ProductoController.createProducto);
 
 router.put('/:id', validarProducto, ProductoController.updateProducto);
 
+router.patch('/:id', ProductoController.updateParcialProducto);
+
 export default router;
