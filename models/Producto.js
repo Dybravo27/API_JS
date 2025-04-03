@@ -23,5 +23,18 @@ class Producto{
       throw new Error("ERROR: Al crear los productos");
     }
   }
+
+  async update(nombre, descripcion, precio, categoria_id, id) {
+    try {
+      const [result] = await connection.query("UPDATE productos SET nombre = ?, descripcion = ?, precio = ?, categoria_id = ? WHERE id = ?",
+        [nombre, descripcion, precio, categoria_id, id]);
+      if (result.affectedRows === 0) {
+        throw new Error("Producto no encontrado");
+      }
+      return { id, nombre, descripcion, precio, categoria_id }
+    } catch (error) {
+      throw new Error("ERROR: Al Actualizar el producto");
+    }
+  }
 }
 export default Producto;
