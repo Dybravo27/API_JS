@@ -57,5 +57,16 @@ class Categoria{
       throw new Error("ERROR: Al Actualizar la categoria parcialmente");
     }
   }
+  async delete(id) {
+    try {
+      const [result] = await connection.query("DELETE FROM categorias WHERE id = ?",[id]);
+      if (result.affectedRows === 0) {
+        throw new Error("Categoria no encontrada");
+      }
+      return { mensaje: "Categoria Eliminada con Exito" }
+    } catch (error) {
+      throw new Error("ERROR: Al Eliminar la categoria");
+    }
+  }
 }
 export default Categoria;
