@@ -52,10 +52,22 @@ class Producto{
       }
       sql += ` WHERE id = ${id}`;
       const [result] = await connection.query(sql);
-      if (result.affectedRows === 0) { throw new Error("Producto no encontrada"); }
-      return { mensaje: "Categoria Actualizada" }
+      if (result.affectedRows === 0) { throw new Error("Producto no encontrado"); }
+      return { mensaje: "Producto Actualizado" }
     } catch (error) {
-      throw new Error("ERROR: Al Actualizar la categoria parcialmente");
+      throw new Error("ERROR: Al Actualizar el producto parcialmente");
+    }
+  }
+
+  async delete(id) {
+    try {
+      const [result] = await connection.query("DELETE FROM productos WHERE id = ?",[id]);
+      if (result.affectedRows === 0) {
+        throw new Error("Producto no encontrado");
+      }
+      return { mensaje: "Producto Eliminado con Exito" }
+    } catch (error) {
+      throw new Error("ERROR: Al Eliminar el Producto");
     }
   }
 }
