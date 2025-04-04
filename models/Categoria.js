@@ -69,7 +69,7 @@ class Categoria{
     if (categoriaRelacionado) {
       return{
         error: true,
-        mensaje: "No se puede eliminar la categoria, ya que esta asociada a uno o mas productos"
+        mensaje: "No se puede eliminar la categoria por que se encuentra asociada a otros productos existentes"
       };
     }
 
@@ -84,7 +84,7 @@ class Categoria{
     
     return{
       error: false,
-      mensaje: "Categoria Eliminada de manera Exitosa"
+      mensaje: "Categoria eliminada de manera Exitosa"
     }
   }
 }
