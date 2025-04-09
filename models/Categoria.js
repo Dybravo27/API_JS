@@ -13,6 +13,14 @@ class Categoria{
       throw new Error("ERROR: al obtener categorias");
     }
   }
+  async getById(id) {
+    try {
+      const [rows] = await connection.query("SELECT * FROM categorias WHERE id = ?",[id]);
+      return rows;
+    } catch (error) {
+      throw new Error("ERROR: al obtener categorias");
+    }
+  }
 
   async create(nombre,descripcion) {
     try {
